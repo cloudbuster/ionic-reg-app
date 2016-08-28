@@ -1,0 +1,31 @@
+<ion-view title="Register" id="page3">
+  <ion-content padding="true" class="has-header">
+    <h3 id="register-heading1" style="color:#000000;">Register to ROCK!</h3>
+    <form id="register-form2" class="list"> <!-- ng-submit="register()"> -->
+      <label class="item item-input" id="register-input2">
+        <span class="input-label">First Name</span>
+        <input type="text" placeholder="" ng-model="reg.firstName">
+      </label>
+      <label class="item item-input" id="register-input4">
+        <span class="input-label">Last Name</span>
+        <input type="text" placeholder="" ng-model="reg.lastName">
+      </label>
+      <label class="item item-input" id="register-input5">
+        <span class="input-label">Email</span>
+        <input type="email" placeholder="" ng-model="reg.email">
+      </label>
+      <label class="item item-select" id="register-select1" name="Diet Selector">
+        <span class="input-label">Dietary Preference</span>
+        <select ng-model="reg.diet">
+          <option value="">Please select</option>
+          <option>Vegetarian</option>
+          <option>FIsh</option>
+          <option>Meat</option>
+        </select>
+      </label>
+      <ion-toggle toggle-class="toggle-positive" id="register-toggle2" name="Goes to Sauna" ng-model="reg.sauna">Goes to Sauna</ion-toggle>
+    </form>
+     <button id="register-button1" class="button button-positive  button-block" ng-click="register()">Register</button>
+    <!-- <input type="submit" class="button button-positive button-block" value="Submit"> -->
+  </ion-content>
+</ion-view>

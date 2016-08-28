@@ -1,0 +1,24 @@
+<ion-view title="Attendees" id="page4">
+  <ion-content padding="true" class="has-header">
+    <h3 id="attendees-heading2" style="color:#000000;">Registered to rock!</h3>
+    <ion-list id="attendees-list1">
+
+      <div class="row" ng-repeat="x in persons">
+        <div class="col">{{ x.firstName }} {{ x.lastName }}</div>
+        <div class="col">{{ x.diet | capitalize }}</div>
+        <div class="col">{{ x.sauna | bool2words }}</div>
+      </div>
+
+
+<!--      <ion-item class="item-icon-right" id="attendees-list-item1">Name
+        <i class="icon ion-ios-person-outline"></i>
+      </ion-item>
+      <ion-item class="item-icon-right" id="attendees-list-item2">Dietary preference
+        <i class="icon ion-ios-pint-outline"></i>
+      </ion-item>
+      <ion-item class="item-icon-right" id="attendees-list-item3">Sauna
+        <i class="icon ion-ios-rainy-outline"></i>
+      </ion-item>-->
+    </ion-list>
+  </ion-content>
+</ion-view>
