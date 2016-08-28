@@ -162,19 +162,20 @@ app.filter('bool2words', function(){
 
 // Creating filter to capitalize the first letter of dietary options that would otherwise
 // be all lowercase.
+
 app.filter('capitalize', function(){
   return function(x){
-    if(x) {
-      var tempString = x[0].toUpperCase();
-      for (var i = 1; i < x.length; i += 1) {
-        tempString += x[i];
+    if (x){
+      this.tempString = x[0].toUpperCase();
+      for (var i = 1; i < x.length; i += 1){
+        this.tempString += x[i];
       }
+    } else {
+      this.tempString = 'No Preference';
     }
-    else { tempString = 'No preference';}
-    return tempString;
+    return this.tempString;
   };
 });
-
 
 app.controller('templateFormController', function($scope, $log, $location, tempStorageService){
   $scope.title = 'Register to ROCK!';
