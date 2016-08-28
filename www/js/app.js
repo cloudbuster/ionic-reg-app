@@ -40,15 +40,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
+  // .state('tab.dash', {
+  //   url: '/dash',
+  //   views: {
+  //     'tab-dash': {
+  //       templateUrl: 'templates/tab-dash.html',
+  //       controller: 'DashCtrl'
+  //     }
+  //   }
+  // })
 
   .state('tab.chats', {
       url: '/chats',
@@ -59,15 +59,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
+    // .state('tab.chat-detail', {
+    //   url: '/chats/:chatId',
+    //   views: {
+    //     'tab-chats': {
+    //       templateUrl: 'templates/chat-detail.html',
+    //       controller: 'ChatDetailCtrl'
+    //     }
+    //   }
+    // })
 
   .state('tab.account', {
     url: '/account',
@@ -80,7 +80,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/chats'); // /tab/dash'); /tab/account'
 
 });
 
@@ -145,10 +145,6 @@ app.service('tempStorageService', function(){
         "sauna": false
       }
     ];
-
-  // Some text that could be on a sole controller, but are here for testing the service.
-  this.infoText = "We have an awesome event on 1st of September at Lutakko aukio!";
-  this.buttonText = "Go ahead and register!";
 });
 
 // Creating custom filter to transform boolean data into user readable words.
@@ -183,19 +179,26 @@ app.filter('capitalize', function(){
 app.controller('templateFormController', function($scope, $log, $location, tempStorageService){
   $scope.title = 'Register to ROCK!';
   $scope.reg = {};
+
   $scope.register = function(){
-    tempStorageService.storageObjArray.push($scope.reg);
+    tempStorageService.storageObjArray.push({
+      'firstName' : $scope.reg.firstName,
+      'lastName' : $scope.reg.lastName,
+      'email' : $scope.reg.email,
+      'diet' : $scope.reg.diet,
+      'sauna' : $scope.reg.sauna
+    });
+    $log.info('What was pushed and into what: ' + JSON.stringify(tempStorageService.storageObjArray));
     localStorage.setItem('attendees', JSON.stringify(tempStorageService.storageObjArray));
     $log.info('sent');
-    $scope.reg = {};
-    $location.path('/tab.account');
+
+    $location.path('/tab/account');
   };
 });
 
 // The injected tempStorageService.storageObjArray is handed over to $scope.persons
 // and iterated in the view with ng-route, with custom filters.
 app.controller('templateAttendeesController', function($scope, $log, tempStorageService){
-  $scope.title = 'These people have registered to ROCK!';
   $scope.persons = JSON.parse(localStorage.getItem('attendees'));
   $log.info(localStorage.getItem('attendees'));
 });
